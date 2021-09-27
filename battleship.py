@@ -25,6 +25,7 @@ Parameters: dict mapping strs to values
 Returns: None
 '''
 def makeModel(data):
+
     return
 
 
@@ -66,7 +67,7 @@ def emptyGrid(rows, cols):
     for i in range(rows):
         list =[]
         for j  in range(cols):
-            list.append(1)
+            list.append(EMPTY_UNCLICKED)
         grid.append(list)
     return grid
 
@@ -96,7 +97,7 @@ def checkShip(grid, ship):
     for each in ship:
         if grid[each[0]][each[1]] != EMPTY_UNCLICKED:
             return False
-    return True
+        return True
 
 
 '''
@@ -291,7 +292,7 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    test.testCheckShip()
+     test.testAddShips()
 
     ## Finally, run the simulation to test it manually ##
     #runSimulation(500, 500)
