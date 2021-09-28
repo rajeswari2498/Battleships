@@ -78,13 +78,9 @@ Parameters: no parameters
 Returns: 2D list of ints
 '''
 def createShip():
-    row = random.randrange(1,8)
-    col = random.randrange(1,8)
-    list = random.randrange(0,1)
-    if list == 0:
-        return[[row,col-1],[row,col],[row,col+1]]
-    else:
-        return[[row-1,col],[row,col],[row+1,col]]
+    return
+
+
 '''
 checkShip(grid, ship)
 Parameters: 2D list of ints ; 2D list of ints
