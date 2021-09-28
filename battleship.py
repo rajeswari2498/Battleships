@@ -284,4 +284,4 @@ if __name__ == "__main__":
     test.testCreateShip()
 
     ## Finally, run the simulation to test it manually ##
-    runSimulation(500, 500)
+    #runSimulation(500, 500)
