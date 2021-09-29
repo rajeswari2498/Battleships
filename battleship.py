@@ -35,7 +35,6 @@ def makeModel(data):
     data["userboard"]=emptyGrid(data["row"],data["col"])
     data["ships"]=5
     addShips(data["computerboard"],data["ships"])
-
     return
 
 
@@ -314,7 +313,7 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-     test.testDrawGrid()
+    test.testDrawGrid()
 
     ## Finally, run the simulation to test it manually ##
-    #runSimulation(500, 500)
+    runSimulation(500, 500)
