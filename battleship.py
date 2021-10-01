@@ -137,7 +137,7 @@ def drawGrid(data, canvas, grid, showShips):
     for row in range(data["row"]):
         for col in range(data["col"]):
             if grid[row][col] == SHIP_UNCLICKED:
-                canvas.create_rectangle(col*data["cellSize"],col*data["cellSize"]+data["cellSize"],row*data["cellSize"]+data["cellSize"],fill="yellow")
+                canvas.create_rectangle(col*data["cellSize"],row*data["cellSize"],col*data["cellSize"]+data["cellSize"],row*data["cellSize"]+data["cellSize"],fill="yellow")
             else:
                 canvas.create_rectangle(col*data["cellSize"],row*data["cellSize"],col*data["cellSize"]+data["cellSize"],row*data["cellSize"]+data["cellSize"],fill="blue")
 
@@ -154,7 +154,6 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isVertical(ship):
-    return
 
 
 '''
