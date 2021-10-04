@@ -35,6 +35,7 @@ def makeModel(data):
     data["userboard"]=emptyGrid(data["row"],data["col"])
     data["ships"]=5
     addShips(data["computerboard"],data["ships"])
+    data["temporaryShip"]=[]
     return
 
 
@@ -46,6 +47,7 @@ Returns: None
 def makeView(data, userCanvas, compCanvas):
     drawGrid(data,compCanvas,data["computerboard"],True)
     drawGrid(data,userCanvas,data["userboard"],True)
+    drawShip(data,userCanvas,data["temporaryShip"])
     
     return
 
@@ -194,6 +196,10 @@ Parameters: dict mapping strs to values ; Tkinter canvas; 2D list of ints
 Returns: None
 '''
 def drawShip(data, canvas, ship):
+    for i in ship:
+        canvas.create_rectangle(i[1]*data["cellSize"],i[0]*data["cellSize"],i[1]*data["cellSize"]+data["cellSize"],i[0]*data["cellSize"]+data["cellSize"],fill="white")
+
+
     return
 
 
@@ -326,7 +332,7 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    test.testGetClickedCell()
+    test.testDrawShip()
 
     ## Finally, run the simulation to test it manually ##
-    #runSimulation(500, 500)
+    runSimulation(500, 500)
