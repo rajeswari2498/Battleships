@@ -36,6 +36,7 @@ def makeModel(data):
     data["ships"]=5
     addShips(data["computerboard"],data["ships"])
     data["temporaryShip"]=[]
+    data["NumberofuserShips"]=0
     return
 
 
@@ -221,7 +222,14 @@ Parameters: dict mapping strs to values
 Returns: None
 '''
 def placeShip(data):
-        return
+    if shipIsValid(data["userboard"],data["temporaryShip"]):
+        for each in data["temporaryShip"]:
+            data["temporaryShip"][each[0]][each[1]] = SHIP_UNCLICKED
+            data["NumberofuserShips"]+=1
+    else:
+        print("ship is notvalid")
+    data["temporaryShip"]=[]
+    return
 
 
 '''
@@ -230,7 +238,16 @@ Parameters: dict mapping strs to values ; int ; int
 Returns: None
 '''
 def clickUserBoard(data, row, col):
-    return
+        if data["NumberofuserShips"] == 5:
+            return
+        if [row,col] in data["temporaryShip"]:
+            return
+        else:
+            data["temporaryShip"].append ([row,col])
+        if len(data["temporaryShip"]) == 3:
+            placeShip(data)
+        if data["NumberofuserShips"] == 5:
+            print("Start playing the game")
 
 
 ### WEEK 3 ###
@@ -335,7 +352,7 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    test.test()
+    test.testShipIsValid()
 
     ## Finally, run the simulation to test it manually ##
     #runSimulation(500, 500)
