@@ -68,7 +68,10 @@ Parameters: dict mapping strs to values ; mouse event object ; 2D list of ints
 Returns: None
 '''
 def mousePressed(data, event, board):
-    pass
+    outputgetclick = getClickedCell(data,event)
+    if board == "user":
+        clickUserBoard(data, outputgetclick[0],outputgetclick[1])
+    return
 
 #### WEEK 1 ####
 
@@ -258,6 +261,10 @@ Parameters: dict mapping strs to values ; 2D list of ints ; int ; int ; str
 Returns: None
 '''
 def updateBoard(data, board, row, col, player):
+    if board[row][col] == SHIP_UNCLICKED:
+        board[row][col] = SHIP_CLICKED 
+    if board[row][col] == EMPTY_UNCLICKED:
+        board[row][col] = EMPTY_CLICKED
     return
 
 
@@ -352,7 +359,7 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    test.testShipIsValid()
+    test.testUpdateBoard()
 
     ## Finally, run the simulation to test it manually ##
     #runSimulation(500, 500)
