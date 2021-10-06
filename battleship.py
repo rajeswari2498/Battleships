@@ -247,6 +247,7 @@ Returns: None
 '''
 def clickUserBoard(data, row, col):
         if data["NumberofuserShips"] == 5:
+            print("Start playing the game")
             return
         if [row,col] in data["temporaryShip"]:
             return
@@ -254,8 +255,6 @@ def clickUserBoard(data, row, col):
             data["temporaryShip"].append ([row,col])
         if len(data["temporaryShip"]) == 3:
             placeShip(data)
-        if data["NumberofuserShips"] == 5:
-            print("Start playing the game")
 
 
 ### WEEK 3 ###
@@ -290,7 +289,8 @@ Parameters: 2D list of ints
 Returns: list of ints
 '''
 def getComputerGuess(board):
-    return
+       return
+
 
 
 '''
@@ -366,7 +366,7 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    #test.testUpdateBoard()
+    test.testGetComputerGuess()
 
     ## Finally, run the simulation to test it manually ##
     runSimulation(500, 500)
