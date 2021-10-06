@@ -239,6 +239,7 @@ Returns: None
 '''
 def clickUserBoard(data, row, col):
         if data["NumberofuserShips"] == 5:
+            print("Start playing the game")
             return
         if [row,col] in data["temporaryShip"]:
             return
@@ -246,8 +247,6 @@ def clickUserBoard(data, row, col):
             data["temporaryShip"].append ([row,col])
         if len(data["temporaryShip"]) == 3:
             placeShip(data)
-        if data["NumberofuserShips"] == 5:
-            print("Start playing the game")
 
 
 ### WEEK 3 ###
