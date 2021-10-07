@@ -284,8 +284,8 @@ def runGameTurn(data, row, col):
         return
     else:
         updateBoard(data, data["computerboard"], row, col,"user")
-        final=getComputerGuess(data["userboard"])
-
+        getComputerGuess(data["computerboard"])
+        updateBoard(data, data["userboard"], row, col,"comp")
 
 '''
 getComputerGuess(board)
