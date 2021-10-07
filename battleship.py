@@ -72,7 +72,7 @@ def mousePressed(data, event, board):
     outputgetclick = getClickedCell(data,event)
     if board == "user":
         clickUserBoard(data, outputgetclick[0],outputgetclick[1])
-    if board == "comp":
+    if board == "comp" and data["NumberofuserShips"] == 5:
         runGameTurn(data,outputgetclick[0],outputgetclick[1])
     return
 
@@ -280,12 +280,12 @@ Parameters: dict mapping strs to values ; int ; int
 Returns: None
 '''
 def runGameTurn(data, row, col):
-    if data["computerboard"] == SHIP_CLICKED or data["computerboard"] == EMPTY_CLICKED:
+    if data["computerboard"][row][col] == SHIP_CLICKED or data["computerboard"][row][col] == EMPTY_CLICKED:
         return
     else:
         updateBoard(data, data["computerboard"], row, col,"user")
-        getComputerGuess(data["computerboard"])
-        updateBoard(data, data["userboard"], row, col,"comp")
+    final =getComputerGuess(data["computerboard"])
+    updateBoard(data, data["userboard"], final[0], final[1],"comp")
 
 '''
 getComputerGuess(board)
