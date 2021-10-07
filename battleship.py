@@ -64,7 +64,8 @@ Parameters: dict mapping strs to values ; key event object
 Returns: None
 '''
 def keyPressed(data, event):
-    pass
+    if event.keysym:
+        makeModel(data)
 
 
 '''
@@ -278,7 +279,7 @@ def updateBoard(data, board, row, col, player):
         board[row][col] = SHIP_CLICKED 
     if board[row][col] == EMPTY_UNCLICKED:
         board[row][col] = EMPTY_CLICKED
-    if isGameOver(board):
+    if isGameOver(board) == True:
         data["winner"] = player
     return
 
@@ -337,11 +338,18 @@ Returns: None
 '''
 def drawGameOver(data, canvas):
     if data["winner"] == "user":
-        canvas.create_text(300,300,text="Congratulations",font="Arial",fill="green")
+        canvas.create_text(200,200,text="Congratulations",font="Arial",fill="green")
+        canvas.create_text(330,330,text="Press Enter and Restart the Game",font="Arial", fill="black")
     if data["winner"] == "comp":
-        canvas.create_text(300,300,text="lost the game",font="Arial",fill="red")
+        canvas.create_text(200,200,text="lost the game",font="Arial",fill="red")
+        canvas.create_text(330,330,text="Press Enter and Restart the Game",font="Arial", fill="black")
     if data["winner"] == "draw":
-        canvas.create_text(300,300,text="Out of Moves",font="Arial",fill="black")
+        canvas.create_text(200,200,text="Out of Moves",font="Arial",fill="black")
+        canvas.create_text(330,330,text="Press Enter and Restart the Game",font="Arial", fill="black")
+
+
+
+
 
     return
 
