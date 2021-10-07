@@ -39,6 +39,8 @@ def makeModel(data):
     data["temporaryShip"]=[]
     data["NumberofuserShips"]=0
     data["winner"]=None
+    data["max_number"]=50
+    data["current_number"]=0
     return
 
 
@@ -77,7 +79,8 @@ def mousePressed(data, event, board):
     if board == "user":
         clickUserBoard(data, outputgetclick[0],outputgetclick[1])
     if board == "comp" and data["NumberofuserShips"] == 5:
-        runGameTurn(data,outputgetclick[0],outputgetclick[1])
+        outputgetclick1 = getClickedCell(data,event)
+        runGameTurn(data,outputgetclick1[0],outputgetclick1[1])
     return
 
 #### WEEK 1 ####
@@ -276,7 +279,7 @@ def updateBoard(data, board, row, col, player):
     if board[row][col] == EMPTY_UNCLICKED:
         board[row][col] = EMPTY_CLICKED
     if isGameOver(board):
-        data["winner"]=player
+        data["winner"] = player
     return
 
 
@@ -292,6 +295,10 @@ def runGameTurn(data, row, col):
         updateBoard(data, data["computerboard"], row, col,"user")
     final =getComputerGuess(data["userboard"])
     updateBoard(data, data["userboard"], final[0], final[1],"comp")
+    data["current_number"]+=1
+    if data["current_number"] == data["max_number"]:
+        data["winner"] = "draw"
+
 
 '''
 getComputerGuess(board)
@@ -330,9 +337,11 @@ Returns: None
 '''
 def drawGameOver(data, canvas):
     if data["winner"] == "user":
-        canvas.create_text(300,300,text="Congratulations",font="Times 30",fill="green")
+        canvas.create_text(300,300,text="Congratulations",font="Arial",fill="green")
     if data["winner"] == "comp":
-        canvas.create_text(300,300,text="lost the game",font="Times 30",fill="red")
+        canvas.create_text(300,300,text="lost the game",font="Arial",fill="red")
+    if data["winner"] == "draw":
+        canvas.create_text(300,300,text="Out of Moves",font="Arial",fill="black")
 
     return
 
@@ -392,7 +401,7 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    test.testIsGameOver()
-    test.testUpdateBoard()
+    test.testDrawGameOver()
+    test.testMakeModel()
     ## Finally, run the simulation to test it manually ##
     runSimulation(500, 500)
