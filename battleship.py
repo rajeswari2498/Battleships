@@ -38,6 +38,7 @@ def makeModel(data):
     addShips(data["computerboard"],data["ships"])
     data["temporaryShip"]=[]
     data["NumberofuserShips"]=0
+    data["winner"]=None
     return
 
 
@@ -50,6 +51,7 @@ def makeView(data, userCanvas, compCanvas):
     drawGrid(data,compCanvas,data["computerboard"],False)
     drawGrid(data,userCanvas,data["userboard"],True)
     drawShip(data,userCanvas,data["temporaryShip"])
+    drawGameOver(data,userCanvas)
     
     return
 
@@ -69,6 +71,8 @@ Parameters: dict mapping strs to values ; mouse event object ; 2D list of ints
 Returns: None
 '''
 def mousePressed(data, event, board):
+    if data["winner"] != None:
+        return
     outputgetclick = getClickedCell(data,event)
     if board == "user":
         clickUserBoard(data, outputgetclick[0],outputgetclick[1])
@@ -271,6 +275,8 @@ def updateBoard(data, board, row, col, player):
         board[row][col] = SHIP_CLICKED 
     if board[row][col] == EMPTY_UNCLICKED:
         board[row][col] = EMPTY_CLICKED
+    if isGameOver(board):
+        data["winner"]=player
     return
 
 
@@ -284,7 +290,7 @@ def runGameTurn(data, row, col):
         return
     else:
         updateBoard(data, data["computerboard"], row, col,"user")
-    final =getComputerGuess(data["computerboard"])
+    final =getComputerGuess(data["userboard"])
     updateBoard(data, data["userboard"], final[0], final[1],"comp")
 
 '''
@@ -307,7 +313,14 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isGameOver(board):
-    return
+    for i in board:
+        for j in i:
+            # print(j)
+            if j == SHIP_UNCLICKED:
+                # print("game done")
+                return False
+    return True
+
 
 
 '''
@@ -316,6 +329,11 @@ Parameters: dict mapping strs to values ; Tkinter canvas
 Returns: None
 '''
 def drawGameOver(data, canvas):
+    if data["winner"] == "user":
+        canvas.create_text(300,300,text="Congratulations",font="Times 30",fill="green")
+    if data["winner"] == "comp":
+        canvas.create_text(300,300,text="lost the game",font="Times 30",fill="red")
+
     return
 
 
@@ -374,7 +392,7 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    test.testGetComputerGuess()
-
+    test.testIsGameOver()
+    test.testUpdateBoard()
     ## Finally, run the simulation to test it manually ##
     runSimulation(500, 500)
