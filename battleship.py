@@ -4,6 +4,7 @@ Name:
 Roll No:
 """
 
+from typing import final
 import battleship_tests as test
 
 project = "Battleship" # don't edit this
@@ -234,6 +235,7 @@ def placeShip(data):
         for each in data["temporaryShip"]:
             data["userboard"][each[0]][each[1]] = SHIP_UNCLICKED
         data["NumberofuserShips"]+=1
+        print("ship is valid")
     else:
         print("ship is notvalid")
     data["temporaryShip"]=[]
@@ -282,6 +284,8 @@ def runGameTurn(data, row, col):
         return
     else:
         updateBoard(data, data["computerboard"], row, col,"user")
+        final=getComputerGuess(data["userboard"])
+
 
 '''
 getComputerGuess(board)
@@ -289,7 +293,11 @@ Parameters: 2D list of ints
 Returns: list of ints
 '''
 def getComputerGuess(board):
-       return
+    while True:
+        a_row = random.randint(0,9)
+        b_col = random.randint(0,9)
+        if board[a_row][b_col] == EMPTY_UNCLICKED or board[a_row][b_col] == SHIP_UNCLICKED:
+            return[a_row,b_col]
 
 
 
@@ -366,7 +374,7 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    #test.testUpdateBoard()
+    test.testGetComputerGuess()
 
     ## Finally, run the simulation to test it manually ##
     runSimulation(500, 500)
